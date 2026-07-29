@@ -77,42 +77,80 @@ width: 100%;
 max-width: 400px;
 `;
 
-export const InputContainer = styled.div `
-display: flex;
-flex-direction: column;
-gap: 5px;
-width: 100%;
-
-
-input {
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   width: 100%;
-  height: 56px;
-  border: none;
-  border-radius: 8px;
-  padding: 0 16px;
-  font-size: 16px;
-  box-sizing: border-box;
-}
 
-label{
+  input {
+    width: 100%;
+    height: 56px;
+    border: none;
+    border-radius: 8px;
+    padding: 0 16px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+
+  .password-container {
+    position: relative;
+    width: 100%;
+
+    input {
+      padding-right: 50px;
+    }
+  }
+
+  .password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    color: #666;
+    font-size: 22px;
+    cursor: pointer;
+  }
+
+  .password-toggle:hover {
+    color: ${props => props.theme.purple};
+  }
+
+  label {
     font-size: 18px;
     font-weight: 600;
-    color: #FFFFFF;
-}
+    color: #ffffff;
+  }
 
-p{
+  p {
     font-size: 14px;
     line-height: 80%;
     color: ${props => props.theme.darkRed};
     font-weight: 600;
     height: 10%;
-}
+  }
 `;
 
 export const Link = styled(ReactLink)`
-text-decoration: none;
-color: ${props => props.theme.white};
-`
+  color: ${props => props.theme.white};
+  text-decoration: underline;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    color: ${props => props.theme.purple};
+  }
+`;
 
 
 

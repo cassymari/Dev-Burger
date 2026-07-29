@@ -5,6 +5,8 @@ import { api } from '../../services/api.js'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../hooks/UserContext.jsx';
+import { useState } from 'react';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 
 import { Container, Form, InputContainer, LeftContainer, RightContainer, Title, Link } from "./styles";
@@ -18,6 +20,7 @@ export function Login() {
 
     const navigate = useNavigate();
     const { putUserData } = useUser();
+    const [showPassword, setShowPassword] = useState(false);
 
     const schema = yup.object({
         email: yup.string().email('Digite um e-mail válido').required('O e-mail é obrigatório'),
@@ -49,10 +52,10 @@ export function Login() {
                 success: {
                     render() {
                         setTimeout(() => {
-                            if(userData?.admin){
+                            if (userData?.admin) {
                                 navigate('/admin/pedidos')
                             } else {
-                                navigate('/')
+                                navigate('/home')
                             }
                         }, 2000);
                         return 'Seja Bem-Vindo(a) 👌'
@@ -65,7 +68,7 @@ export function Login() {
 
         putUserData(userData)
 
-        
+
     };
 
     return (
@@ -81,16 +84,44 @@ export function Login() {
                 <Form onSubmit={handleSubmit(onSubmit)}>
                     <InputContainer>
                         <label>Email</label>
-                        <input type="email" {...register("email")} />
+
+                        <input
+                            type="email"
+                            {...register('email')}
+                        />
+
                         <p>{errors?.email?.message}</p>
                     </InputContainer>
 
                     <InputContainer>
                         <label>Senha</label>
-                        <input type="password"  {...register("password")} />
+
+                        <div className="password-container">
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                {...register('password')}
+                            />
+
+                            <button
+                                type="button"
+                                className="password-toggle"
+                                onClick={() =>
+                                    setShowPassword(previousValue => !previousValue)
+                                }
+                                aria-label={
+                                    showPassword ? 'Ocultar senha' : 'Mostrar senha'
+                                }
+                            >
+                                {showPassword ? <FiEyeOff /> : <FiEye />}
+                            </button>
+                        </div>
+
                         <p>{errors?.password?.message}</p>
                     </InputContainer>
 
+                    <Link to="/esqueci-senha">
+                        Esqueceu a senha?
+                    </Link>
 
                     <Button type="submit">Entrar</Button>
                 </Form>
