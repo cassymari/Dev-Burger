@@ -33,92 +33,94 @@ export const CartProvider = ({ children }) => {
 
             setCartProducts(newProductsInCart);
         } else {
-            product.quantity = 1
-            newProductsInCart = [...cartProducts, product]
-            setCartProducts(newProductsInCart)
+            newProductsInCart = [
+                ...cartProducts,
+                {
+                    ...product,
+                    quantity: 1,
+                },
+            ];
 
+            setCartProducts(newProductsInCart);
         }
-
-        updateLocalStorage(newProductsInCart);
-    };
+    }
 
 
+        const clearCart = () => {
+            setCartProducts([]);
+            updateLocalStorage([]);
+        };
 
-    const clearCart = () => {
-        setCartProducts([]);
-        updateLocalStorage([]);
-    };
+        const deleteProduct = (productId) => {
+            const newCart = cartProducts.filter((prd) => prd.id !== productId)
 
-    const deleteProduct = (productId) => {
-        const newCart = cartProducts.filter((prd) => prd.id !== productId)
+            setCartProducts(newCart)
 
-        setCartProducts(newCart)
+            updateLocalStorage(newCart)
+        };
 
-        updateLocalStorage(newCart)
-    };
-
-    const increaseProduct = (productId) => {
-        const newCart = cartProducts.map((prd) => {
-            return prd.id === productId
-                ? { ...prd, quantity: prd.quantity + 1 }
-                : prd;
-        });
-
-        setCartProducts(newCart);
-        updateLocalStorage(newCart);
-    };
-
-    const decreaseProduct = (productId) => {
-        const CartIndex = cartProducts.findIndex(
-            (prd) => prd.id === productId
-        );
-
-        if (CartIndex < 0) return;
-
-        if (cartProducts[CartIndex].quantity > 1) {
-            const newCart = cartProducts.map((prd) =>
-                prd.id === productId
-                    ? { ...prd, quantity: prd.quantity - 1 }
-                    : prd
-            );
+        const increaseProduct = (productId) => {
+            const newCart = cartProducts.map((prd) => {
+                return prd.id === productId
+                    ? { ...prd, quantity: prd.quantity + 1 }
+                    : prd;
+            });
 
             setCartProducts(newCart);
             updateLocalStorage(newCart);
+        };
 
-        } else {
-            deleteProduct(productId);
-        }
+        const decreaseProduct = (productId) => {
+            const CartIndex = cartProducts.findIndex(
+                (prd) => prd.id === productId
+            );
+
+            if (CartIndex < 0) return;
+
+            if (cartProducts[CartIndex].quantity > 1) {
+                const newCart = cartProducts.map((prd) =>
+                    prd.id === productId
+                        ? { ...prd, quantity: prd.quantity - 1 }
+                        : prd
+                );
+
+                setCartProducts(newCart);
+                updateLocalStorage(newCart);
+
+            } else {
+                deleteProduct(productId);
+            }
+        };
+
+
+
+        return (
+            <CartContext.Provider
+                value={{
+                    cartProducts,
+                    putProductInCart,
+                    clearCart,
+                    deleteProduct,
+                    increaseProduct,
+                    decreaseProduct
+                }}
+            >
+                {children}
+            </CartContext.Provider>
+        );
     };
 
+    export const useCart = () => {
+        const context = useContext(CartContext);
 
+        if (!context) {
+            throw new Error('useCart must be used with a context');
+        }
 
-    return (
-        <CartContext.Provider
-            value={{
-                cartProducts,
-                putProductInCart,
-                clearCart,
-                deleteProduct,
-                increaseProduct,
-                decreaseProduct
-            }}
-        >
-            {children}
-        </CartContext.Provider>
-    );
-};
+        return context;
+    };
 
-export const useCart = () => {
-    const context = useContext(CartContext);
-
-    if (!context) {
-        throw new Error('useCart must be used with a context');
-    }
-
-    return context;
-};
-
-export default CartProvider;
+    export default CartProvider;
 
 /*  
 Regras de negócios 

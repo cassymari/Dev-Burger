@@ -1,47 +1,95 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ProductImage = styled.img`
-height: 80px;
-width: 80px;
-border-radius: 16px;
-`
+  width: 80px;
+  height: 80px;
+
+  border-radius: 16px;
+  object-fit: cover;
+  flex-shrink: 0;
+
+  @media (max-width: 600px) {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+  }
+
+  @media (max-width: 400px) {
+    width: 54px;
+    height: 54px;
+  }
+`;
 
 export const ButtonGroup = styled.div`
-display: flex;
-align-items: center;
-gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 
-button{
+  button {
+    width: 32px;
+    height: 32px;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
-    color: ${props => props.theme.white};
-    border-radius: 4px;
-    background-color: ${props => props.theme.purple};
-    transition: all 0.4s;
-    border: none;
 
-    &:hover{
-        background-color: #7a3e8c;
+    color: ${({ theme }) => theme.white};
+    border: none;
+    border-radius: 4px;
+    background-color: ${({ theme }) => theme.purple};
+
+    cursor: pointer;
+    transition: background-color 0.4s;
+
+    &:hover {
+      background-color: #7a3e8c;
     }
-}
-`
+  }
+
+  @media (max-width: 600px) {
+    gap: 8px;
+
+    button {
+      width: 28px;
+      height: 28px;
+    }
+  }
+`;
 
 export const EmptyCart = styled.p`
-font-size: 20px;
-text-align: center;
-font-weight: bold;
-`
+  width: 100%;
+  padding: 32px 16px;
+
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+
+  box-sizing: border-box;
+
+  @media (max-width: 480px) {
+    font-size: 17px;
+  }
+`;
 
 export const TotalPrice = styled.p`
-font-weight: bold;
-`
+  margin: 0;
+  font-weight: bold;
+  white-space: nowrap;
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
+`;
 
 export const TrashImagem = styled.img`
-width: 20px;
-height: 20px;
-cursor: pointer;
+  width: 20px;
+  height: 20px;
 
-`
+  cursor: pointer;
+  flex-shrink: 0;
+
+  @media (max-width: 480px) {
+    width: 18px;
+    height: 18px;
+  }
+`;

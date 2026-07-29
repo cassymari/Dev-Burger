@@ -1,80 +1,123 @@
-import styled from "styled-components"
-import BackgroundLogin from '../../assets/background-login.png'
-import Background from '../../assets/background2.svg'
-import { Link as ReactLink } from "react-router-dom";
+import styled from 'styled-components';
+import BackgroundLogin from '../../assets/background-login.png';
+import Background from '../../assets/background2.svg';
+import { Link as ReactLink } from 'react-router-dom';
 
-export const Container = styled.div `
-display: flex;
-height: 100vh;
-width: 100vw;
+export const Container = styled.div`
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
 
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
-export const LeftContainer = styled.div `
-background: url('${BackgroundLogin}');
-background-size: cover;
-background-position: center;
+export const LeftContainer = styled.div`
+  background: url('${BackgroundLogin}');
+  background-size: cover;
+  background-position: center;
 
-height: 100%;
-width: 100%;
-max-width: 50%;
+  min-height: 100vh;
+  width: 50%;
 
-display: flex;
-align-items: center;
-justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-img{
+  img {
     width: 80%;
-}
+    max-width: 450px;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    min-height: 220px;
+    padding: 24px;
+
+    img {
+      width: 55%;
+      max-width: 220px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    min-height: 180px;
+
+    img {
+      width: 65%;
+    }
+  }
 `;
 
-export const RightContainer = styled.div `
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
+export const RightContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
-height: 100%;
-width: 100%;
-max-width: 50%;
-background: url('${Background}');
-background-color: #1e1e1e;
+  min-height: 100vh;
+  width: 50%;
 
-p{
-    color: ${props => props.theme.white};
+  padding: 40px 24px;
+  box-sizing: border-box;
+
+  background: url('${Background}');
+  background-color: #1e1e1e;
+
+  p {
+    color: ${({ theme }) => theme.white};
     font-size: 18px;
     font-weight: 800;
+    text-align: center;
 
-    a{
-        text-decoration: underline;
-
+    a {
+      text-decoration: underline;
     }
-}
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    min-height: auto;
+    padding: 32px 20px 48px;
+  }
 `;
 
 export const Title = styled.h2`
   font-family: roadRageFont;
   text-align: center;
   font-size: 40px;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 0;
- 
 
-  span{
+  span {
     display: block;
-    color: ${props => props.theme.purple};
+    color: ${({ theme }) => theme.purple};
     font-family: roadRageFont;
-   
+  }
+
+  @media (max-width: 768px) {
+    font-size: 34px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 30px;
   }
 `;
 
-export const Form = styled.form `
-display: flex;
-flex-direction: column;
-gap: 20px;
-padding: 20px;
-width: 100%;
-max-width: 400px;
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  padding: 20px 0;
+  width: 100%;
+  max-width: 400px;
+
+  @media (max-width: 480px) {
+    gap: 14px;
+  }
 `;
 
 export const InputContainer = styled.div`
@@ -93,13 +136,24 @@ export const InputContainer = styled.div`
     box-sizing: border-box;
   }
 
+  label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  p {
+    margin: 0;
+    min-height: 16px;
+    font-size: 14px;
+    line-height: 1.2;
+    color: ${({ theme }) => theme.darkRed};
+    font-weight: 600;
+  }
+
   .password-container {
     position: relative;
     width: 100%;
-
-    input {
-      padding-right: 50px;
-    }
   }
 
   .password-toggle {
@@ -108,52 +162,26 @@ export const InputContainer = styled.div`
     right: 16px;
     transform: translateY(-50%);
 
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
     display: flex;
     align-items: center;
     justify-content: center;
 
-    padding: 0;
-    border: none;
-    background: transparent;
-
-    color: #666;
     font-size: 22px;
-    cursor: pointer;
-  }
-
-  .password-toggle:hover {
-    color: ${props => props.theme.purple};
-  }
-
-  label {
-    font-size: 18px;
-    font-weight: 600;
-    color: #ffffff;
-  }
-
-  p {
-    font-size: 14px;
-    line-height: 80%;
-    color: ${props => props.theme.darkRed};
-    font-weight: 600;
-    height: 10%;
+    color: #666;
   }
 `;
 
 export const Link = styled(ReactLink)`
-  color: ${props => props.theme.white};
+  color: ${({ theme }) => theme.white};
   text-decoration: underline;
   font-size: 15px;
   font-weight: 600;
-  cursor: pointer;
 
   &:hover {
-    color: ${props => props.theme.purple};
+    color: ${({ theme }) => theme.purple};
   }
 `;
-
-
-
-
-
-

@@ -1,75 +1,124 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
-background-color: ${props => props.theme.white};
-border-radius: 20px;
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-margin-bottom: 20px;
+  width: 100%;
+  min-width: 0;
+  margin-bottom: 20px;
 
-*{
-    color: ${props => props.theme.secondBlack};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  border-radius: 20px;
+  background-color: ${({ theme }) => theme.white};
+
+  overflow: hidden;
+  box-sizing: border-box;
+
+  * {
+    box-sizing: border-box;
+    color: ${({ theme }) => theme.secondBlack};
     font-weight: 500;
-}
+  }
 
-.container-top{
-
+  .container-top {
     display: grid;
-    grid-gap: 10px 30%;
-    grid-template-areas: 
-        "title title"
-        "items items-price"
-        "delivery-tax delivery-tax-price";
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'title title'
+      'items items-price'
+      'delivery-tax delivery-tax-price';
 
-        .title{
-            grid-area: title;
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            background-color: ${props => props.theme.secondBlack};
-            color: ${props => props.theme.white};
-            width: 100%;
-            padding: 15px;
-            text-align: center;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
+    gap: 14px 20px;
 
-        }
+    .title {
+      grid-area: title;
 
-        .items{
-            grid-area: items;
-            padding-left: 20px;
-        }
+      width: 100%;
+      margin: 0 0 10px;
+      padding: 15px;
 
-        .items-price{
-            grid-area: items-price;
-             padding-right: 20px;
-        }
+      color: ${({ theme }) => theme.white};
+      background-color: ${({ theme }) => theme.secondBlack};
 
-        .delivery-tax{
-            grid-area: delivery-tax;
-             padding-left: 20px;
-        }
+      font-size: 20px;
+      font-weight: 700;
+      text-align: center;
+    }
 
-        .delivery-tax-price{
-            grid-area: delivery-tax-price;
-             padding-right: 20px;
-        }
+    .items {
+      grid-area: items;
+      padding-left: 20px;
+    }
 
+    .items-price {
+      grid-area: items-price;
+      padding-right: 20px;
+      text-align: right;
+      white-space: nowrap;
+    }
 
-}
+    .delivery-tax {
+      grid-area: delivery-tax;
+      padding-left: 20px;
+    }
 
-.container-bottom {
+    .delivery-tax-price {
+      grid-area: delivery-tax-price;
+      padding-right: 20px;
+      text-align: right;
+      white-space: nowrap;
+    }
+  }
+
+  .container-bottom {
+    width: 100%;
+    margin-top: 24px;
+    padding: 18px 20px;
+
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+
     font-size: 20px;
     font-weight: 700;
-    margin-top: 24px;
 
-    *{
-        
-        font-weight: 700;
+    * {
+      margin: 0;
+      font-weight: 700;
     }
-}
-`
+  }
+
+  @media (max-width: 480px) {
+    border-radius: 14px;
+
+    .container-top {
+      gap: 12px 14px;
+
+      .title {
+        padding: 13px;
+        font-size: 18px;
+      }
+
+      .items,
+      .delivery-tax {
+        padding-left: 14px;
+        font-size: 14px;
+      }
+
+      .items-price,
+      .delivery-tax-price {
+        padding-right: 14px;
+        font-size: 14px;
+      }
+    }
+
+    .container-bottom {
+      padding: 16px 14px;
+      font-size: 17px;
+    }
+  }
+`;

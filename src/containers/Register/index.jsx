@@ -61,7 +61,7 @@ export function Register() {
             navigate('/login')
         }, 2000);
         toast.success('Conta criada com sucesso!')
-    } else if(status === 409){
+    } else if(status === 400){
         toast.error('Email já cadastrado! Faça login para continuar.');
     } else{
         throw new Error()
