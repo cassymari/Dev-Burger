@@ -25,14 +25,14 @@ const STATUS_CONTENT_MAP = {
         iconColor: "#30B130",
         icon: SuccessIcon,
         buttonText: 'Voltar para a Loja',
-        url: '/',
+        url: '/home',
     },
     processing: {
         text: "Pagamento em Processamento",
         iconColor: "#6D6E78",
         icon: InfoIcon,
         buttonText: 'Voltar para a Loja',
-        url: '/',
+        url: '/home',
     },
     requires_payment_method: {
         text: "Seu pagamento não foi bem-sucedido, por favor, tente novamente.",
